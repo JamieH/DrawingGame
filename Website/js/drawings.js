@@ -34,15 +34,15 @@ $(function () {
     };
 
     $cvs.mousedown(function (e) {
-        if (e.button === 0) {
-            draw = 1;
-            ctx.beginPath();
-            ctx.moveTo(e.pageX - left, e.pageY - top);
-            ctx.fillCircle(e.pageX - left, e.pageY - top, 2);
-        } else {
-            draw = 0;
-        }
-    })
+            if (e.button === 0) {
+                draw = 1;
+                ctx.beginPath();
+                ctx.moveTo(e.pageX - left, e.pageY - top);
+                ctx.fillCircle(e.pageX - left, e.pageY - top, 2);
+            } else {
+                draw = 0;
+            }
+        })
         .mouseup(function (e) {
             if (e.button === 0) {
                 draw = 0;
