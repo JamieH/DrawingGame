@@ -10,6 +10,11 @@ namespace QuickDrawServer
     {
         static void Main(string[] args)
         {
+            while (true)
+            {
+                Websocket.Start(9000);
+
+            }
         }
     }
 }

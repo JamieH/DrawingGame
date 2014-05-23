@@ -3,14 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SuperWebSocket;
 
 namespace QuickDrawServer.Structs
 {
     internal class Client
     {
-        public Client()
+        private DateTime _lastping;
+        public WebSocketSession WebSocketSession;
+        public Client(WebSocketSession webSocketSession)
         {
-            
+            WebSocketSession = webSocketSession;
+        }
+        public Task Ping()
+        {
+            return Task.Run(() =>
+            {
+                
+            });
+        }
+
+        public void PingReply()
+        {
+            _lastping = new DateTime();
+        }
+
+        public bool isConnected()
+        {
+            if (DateTime.Now - _lastping < new TimeSpan(0, 0, 15))
+            {
+                return true;
+            }
+                return false;
         }
     }
 }
