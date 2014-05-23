@@ -2,14 +2,15 @@ $(function () {
 
     var ctx = document.getElementById("canvas").getContext("2d"),
         canvas = document.getElementById("canvas"),
+        container = document.getElementById("gameContainer"),
         $cvs = $("#canvas"),
         img, top = $cvs.offset().top,
         left = $cvs.offset().left,
         draw = 0
 
     var resizeCvs = function () {
-        ctx.canvas.width = $(window).width();
-        ctx.canvas.height = $(window).height();
+        ctx.canvas.width = container.clientWidth;
+        ctx.canvas.height = container.clientHeight;
     };
 
     var getImage = function ()
