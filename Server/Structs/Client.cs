@@ -7,20 +7,13 @@ using SuperWebSocket;
 
 namespace QuickDrawServer.Structs
 {
-    internal class Client
+    class Client
     {
         private DateTime _lastping;
         public WebSocketSession WebSocketSession;
         public Client(WebSocketSession webSocketSession)
         {
             WebSocketSession = webSocketSession;
-        }
-        public Task Ping()
-        {
-            return Task.Run(() =>
-            {
-                
-            });
         }
 
         public void PingReply()

@@ -8,6 +8,7 @@ namespace QuickDrawServer
 {
     internal static class Websocket
     {
+
         private static WebSocketServer _webSocketServer;
         private static Dictionary<WebSocketSession, Client> _clientList; 
         public static bool Start(int port)
@@ -34,9 +35,9 @@ namespace QuickDrawServer
             return true;
         }
 
-        public static void SendMessage(string msg, Client receiver)
+        public static void SendMessage(Packet msg, Client receiver)
         {
-            receiver.WebSocketSession.Send(msg);
+            receiver.WebSocketSession.Send(msg.ToString());
         }
 
         public static void SendData(byte[] data, Client receiver)
@@ -51,13 +52,14 @@ namespace QuickDrawServer
 
         private static void _webSocketServer_NewMessageReceived(WebSocketSession session, string value)
         {
-            throw new NotImplementedException();
+
         }
 
         private static void _webSocketServer_SessionClosed(WebSocketSession session, CloseReason value)
         {
             if (_clientList.ContainsKey(session))
             {
+                //TODO do something with the CloseReason
                 _clientList[session] = null;
                 _clientList.Remove(session);
             }
