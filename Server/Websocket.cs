@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using QuickDrawServer.Structs;
 using SuperSocket.SocketBase;
 using SuperWebSocket;
@@ -52,8 +53,9 @@ namespace QuickDrawServer
 
         private static void _webSocketServer_NewMessageReceived(WebSocketSession session, string value)
         {
-            Type header = new Type();
-            Packet.PacketHandler();
+            dynamic msg = JsonConvert.DeserializeObject(value);
+            Type header = msg.Header;
+            Packet.PacketHandler(header, _clientList[session], msg);
         }
 
         private static void _webSocketServer_SessionClosed(WebSocketSession session, CloseReason value)

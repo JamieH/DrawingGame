@@ -8,8 +8,6 @@ namespace QuickDrawServer.Structs
 {
     class Lobby
     {
-        private bool disposed = false;
-
         private List<Client> _clients;
         private Client _hostClient;
         public Lobby(int lobbyID, Client hostClient)
@@ -38,7 +36,7 @@ namespace QuickDrawServer.Structs
             bool shouldDispose = true;
             foreach (var client in _clients)
             {
-                if (client.isConnected())
+                if (client.IsConnected())
                 {
                     shouldDispose = false;
                     break;

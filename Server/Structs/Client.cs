@@ -14,6 +14,7 @@ namespace QuickDrawServer.Structs
         public Client(WebSocketSession webSocketSession)
         {
             WebSocketSession = webSocketSession;
+            
         }
 
         public void PingReply()
@@ -21,7 +22,7 @@ namespace QuickDrawServer.Structs
             _lastping = new DateTime();
         }
 
-        public bool isConnected()
+        public bool IsConnected()
         {
             if (DateTime.Now - _lastping < new TimeSpan(0, 0, 15))
             {

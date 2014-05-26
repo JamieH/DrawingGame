@@ -14,14 +14,14 @@ namespace QuickDrawServer
 
     internal static class Packet
     {
-        private static Dictionary<Type, Action<string>> _actions = new Dictionary<Type, Action<string>>(); 
+        private static Dictionary<Type, Action<dynamic>> _actions = new Dictionary<Type, Action<dynamic>>(); 
 
-        public static void RegisterCallback(Type packetType, Action<string> action)
+        public static void RegisterCallback(Type packetType, Action<dynamic> action)
         {
             _actions.Add(packetType, action);
         }
 
-        public static void PacketHandler(Type header, Client sender, string msg)
+        public static void PacketHandler(Type header, Client sender, dynamic msg)
         {
             _actions[header].Invoke(msg);
         }
