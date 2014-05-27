@@ -35,9 +35,9 @@ namespace QuickDrawServer
             return true;
         }
 
-        public static void SendMessage(Packet msg, Client receiver)
+        public static void SendMessage(string msg, Client receiver)
         {
-            receiver.WebSocketSession.Send(msg.ToString());
+            receiver.WebSocketSession.Send(msg);
         }
 
         public static void SendData(byte[] data, Client receiver)
@@ -52,7 +52,8 @@ namespace QuickDrawServer
 
         private static void _webSocketServer_NewMessageReceived(WebSocketSession session, string value)
         {
-
+            Type header = new Type();
+            Packet.PacketHandler();
         }
 
         private static void _webSocketServer_SessionClosed(WebSocketSession session, CloseReason value)

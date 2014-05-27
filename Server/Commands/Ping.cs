@@ -15,7 +15,7 @@ namespace QuickDrawServer.Commands
         }
         public static void SendPing(Client client)
         {
-            
+            Websocket.SendMessage();
         }
     }
 }
