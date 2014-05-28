@@ -53,13 +53,23 @@ namespace QuickDrawServer
 
         private static void _webSocketServer_NewMessageReceived(WebSocketSession session, string value)
         {
-            dynamic msg = JsonConvert.DeserializeObject(value);
-            Type header = msg.Header;
-            Packet.PacketHandler(header, _clientList[session], msg);
+            try
+            {
+                Console.WriteLine(value);
+                dynamic msg = JsonConvert.DeserializeObject(value);
+                Type header = msg.Header;
+                Packet.PacketHandler(header, _clientList[session], msg);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Malformed Packet");
+            }
+            
         }
 
         private static void _webSocketServer_SessionClosed(WebSocketSession session, CloseReason value)
         {
+            Console.WriteLine(value);
             if (_clientList.ContainsKey(session))
             {
                 //TODO do something with the CloseReason
@@ -75,6 +85,7 @@ namespace QuickDrawServer
 
         private static void _webSocketServer_NewSessionConnected(WebSocketSession session)
         {
+            Console.WriteLine("New connection from: {0}", session.RemoteEndPoint);
             _clientList.Add(session, new Client(session));
         }
     }

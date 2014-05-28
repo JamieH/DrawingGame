@@ -1,0 +1,70 @@
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>
+</title>
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+<script>
+    function init() {
+        websocket = new WebSocket("ws://localhost:9000");
+
+        websocket.onopen = function () {
+            document.getElementById("output").innerHTML += '<br><p><span class="label label-success">Connected</span></p>';
+                    };
+
+        websocket.onmessage = function (evt) {
+            document.getElementById("output").innerHTML += '<p><span class="label label-primary">Received:</span>' + " " + evt.data + "</p>";
+        };
+
+        websocket.onerror = function (evt) {
+            document.getElementById("output").innerHTML += '<p><span class="label label-danger">Error:</span>' + " " + evt.data + "</p>";        };
+    }
+
+    function sendMessage(message) {
+            document.getElementById("output").innerHTML += '<p><span class="label label-default">Sent:</span>' + " " + message + "</p>";
+                    websocket.send(message);
+    }
+
+    window.addEventListener("load", init, false);
+</script>
+<style class="custom-css">
+#jumbo {
+  background-color: #333;
+  color: #eee;
+}
+#jumbo p {
+  font-size: 16px;
+}
+#try-header {
+  margin: 30px 0px;
+}
+#try-more {
+  margin: 30px 0px;
+  font-style: italic;
+}
+</style>
+</head>
+
+<body>
+  <div id="jumbo" class="jumbotron">
+    <div class="container">
+      <h1>
+        QuickDraw Websocket Testing
+      </h1>
+    </div>
+  </div>
+  <div class="container">
+      <div class="col-lg-6">
+          <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+            <input onkeypress="if(this.value) {if (window.event.keyCode == 13) { sendMessage(this.value); this.value = null; }}" type="text" class="form-control" placeholder="Write message here">
+        </div>
+  </div><!-- /.col-lg-6 -->
+
+
+        <div id="output"></div>
+  </div>
+</body>
+</html
